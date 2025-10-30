@@ -1,0 +1,17 @@
+# .snyk file
+version: v1.0.0
+
+# Ignore specific vulnerabilities
+ignore:
+  "SNYK-JAVA-ORGAPACHECOMMONS-1234567":
+    - "*":
+        reason: "False positive - not exploitable in our context"
+        expires: "2024-12-31T23:59:59.999Z"
+
+# Patch configuration
+patches: {}
+
+# Language settings
+language-settings:
+  java:
+    # Java-specific settings
