@@ -19,13 +19,13 @@ jobs:
               run: |
                   mvn clean package -DskipTests
                   docker build -t cicd-demo:test .
-                  docker run -d -p 3000:3000 --name app cicd-demo:test
-                  timeout 60 bash -c 'until curl -f http://localhost:3000/; do sleep 2; done'
+                  docker run -d -p 8080:8080 --name app cicd-demo:test
+                  timeout 60 bash -c 'until curl -f http://localhost:8080/; do sleep 2; done'
 
             - name: ZAP Full Scan
               uses: zaproxy/action-full-scan@v0.12.0
               with:
-                  target: "http://localhost:3000"
+                  target: "http://localhost:8080"
                   rules_file_name: ".zap/rules.tsv"
                   cmd_options: "-a -j -m 15"
 

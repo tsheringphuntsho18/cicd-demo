@@ -21,15 +21,15 @@ jobs:
               run: |
                   mvn clean package -DskipTests
                   docker build -t cicd-demo:test .
-                  docker run -d -p 3000:3000 --name app cicd-demo:test
-                  timeout 60 bash -c 'until curl -f http://localhost:3000/; do sleep 2; done'
+                  docker run -d -p 8080:8080 --name app cicd-demo:test
+                  timeout 60 bash -c 'until curl -f http://localhost:8080/; do sleep 2; done'
 
             - name: Run ZAP Scan
               run: |
                   docker run -v $(pwd):/zap/wrk/:rw \
                     -t ghcr.io/zaproxy/zaproxy:stable \
                     zap-baseline.py \
-                    -t http://localhost:3000 \
+                    -t http://localhost:8080 \
                     -J zap_report.json \
                     -r zap_report.html
 
