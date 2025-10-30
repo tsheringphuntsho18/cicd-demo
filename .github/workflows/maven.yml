@@ -26,7 +26,7 @@ jobs:
     name: SA scan using snyk
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/maven@master
         env:
